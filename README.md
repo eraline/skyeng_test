@@ -28,7 +28,7 @@ DWH доступен по порту 5434
 
 ### 2. Построение ETL:
 
-Для реализации ETL я решил для удобства создать view в БД источнике, на основе которой соберутся данные для целевой таблицы в DWH:
+Для реализации ETL я решил для удобства создать view в БД источнике для сущности уроков, на основе которой соберутся данные для целевой таблицы в DWH:
 ```SQL
 drop view if exists etl_f_stream_module_lesson_view cascade;
 create or replace view etl_f_stream_module_lesson_view as
