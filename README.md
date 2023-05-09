@@ -101,7 +101,7 @@ def transform(dataframes: dict):
 
 
 Далее выполняется Load часть:
-В рамках процесса данные из всех датафреймов выгружаются в **Stage** таблицы (d_stream_module_stage, d_course_stage, d_stream_stage и f_lesson_stage).
+В рамках процесса данные из всех датафреймов выгружаются в **Stage** таблицы (d_stream_module_stage, d_course_stage, d_stream_stage и f_lesson_stage). Так как мне показалось это удобным решением при поддержке и отладке.
 
 ```python
 @task()
