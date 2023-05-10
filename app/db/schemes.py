@@ -171,7 +171,6 @@ CREATE TABLE f_lesson (
     online_lesson_recording_url VARCHAR(255)
 );
 
-drop function upsert_d_course(); 
 CREATE OR REPLACE FUNCTION upsert_d_course() 
 RETURNS table(row_cnt integer) as
 $$

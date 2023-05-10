@@ -1,26 +1,5 @@
 version: '3.8'
 services:
-  db:
-    image: postgres:15.2
-    restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    ports:
-      - '5433:5432'
-    volumes: 
-      - db:/var/lib/postgresql/data
-    
-  dwh:
-    image: postgres:15.2
-    restart: always
-    environment:
-      - POSTGRES_USER=dwh
-      - POSTGRES_PASSWORD=dwh
-    ports:
-      - '5434:5432'
-    volumes: 
-      - dwh:/var/lib/postgresql/data
 
   app:
     build:
@@ -29,8 +8,42 @@ services:
     ports:
       - '4200:4200'
     depends_on:
-      - db
-      - dwh
+      db:
+        condition: service_healthy
+      dwh:
+        condition: service_healthy
+
+  db:
+    image: postgres:15.2
+    user: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5433:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    
+  dwh:
+    image: postgres:15.2
+    user: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5434:5432'
+    volumes: 
+      - dwh:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 
 volumes:
