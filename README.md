@@ -186,3 +186,6 @@ f_lesson fl fl
 join d_stream ds using (stream_id)
 join d_course dc using (course_id);
 ```
+
+### 4. Итоговая схема Dataflow
+![dataflow_diagram](dataflow.png)
